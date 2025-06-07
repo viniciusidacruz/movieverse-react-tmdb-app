@@ -15,6 +15,15 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@shared/*": ["src/@shared/*"],
+      "@modules/*": ["src/modules/*"],
+      "@home_module/*": ["src/modules/home/*"],
+      "@favorites_module/*": ["src/modules/favorites/*"]
+    },
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

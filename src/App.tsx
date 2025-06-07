@@ -1,1 +1,3 @@
-export const App = () => <h1>Hello</h1>;
+import { AppRoutes } from "@shared/config";
+
+export const App = () => <AppRoutes />;
