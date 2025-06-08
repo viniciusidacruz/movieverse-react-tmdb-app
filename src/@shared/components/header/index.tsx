@@ -5,7 +5,7 @@ import { ROUTES } from "@shared/constants";
 import { Link, SearchField } from "@shared/components";
 
 export const Header = () => (
-  <header className="w-full border-b border-slate-700">
+  <header className="w-full border-b border-slate-700 sticky">
     <div className="container mx-auto px-2 py-4 flex gap-4 items-center justify-between flex-col md:flex-row">
       <Redirect
         to={ROUTES.home.path}
