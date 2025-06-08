@@ -6,6 +6,9 @@ import { Header } from "@shared/components";
 export const LayoutPage = () => (
   <Fragment>
     <Header />
-    <Outlet />
+
+    <main className="container mx-auto px-2 py-6">
+      <Outlet />
+    </main>
   </Fragment>
 );
