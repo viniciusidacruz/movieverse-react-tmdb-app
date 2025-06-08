@@ -1,8 +1,8 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect } from "vitest";
+import { NuqsAdapter } from "nuqs/adapters/react";
 import { act, render, screen, fireEvent } from "@testing-library/react";
 
 import { SearchField } from ".";
-import { NuqsAdapter } from "nuqs/adapters/react";
 
 const sut = (
   <NuqsAdapter>
