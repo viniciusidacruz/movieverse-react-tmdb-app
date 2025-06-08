@@ -1,1 +1,7 @@
-export const Header = () => <header>Header</header>;
+import { SearchField } from "@shared/components";
+
+export const Header = () => (
+  <header>
+    <SearchField />
+  </header>
+);
