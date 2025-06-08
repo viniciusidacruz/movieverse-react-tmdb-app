@@ -9,6 +9,7 @@ import {
 import type { Movie } from "@shared/interfaces";
 
 import type { IFavoritesContext, IFavoritesContextProvider } from "./types";
+import { useQueryState } from "nuqs";
 
 export const FavoritesContext = createContext<IFavoritesContext | null>(null);
 
@@ -23,6 +24,10 @@ export const FavoritesContextProvider = ({
   const [favorites, setFavorites] = useState<Movie[]>(() =>
     loadStorageFavorites()
   );
+
+  const [filter] = useQueryState("filter", {
+    defaultValue: "title_asc",
+  });
 
   const hasFavorites = !!favorites.length;
 
@@ -52,18 +57,33 @@ export const FavoritesContextProvider = ({
     [favorites]
   );
 
+  const getFilteredMovies = () => {
+    switch (filter) {
+      case "title_asc":
+        return [...favorites].sort((a, b) => a.title.localeCompare(b.title));
+      case "title_desc":
+        return [...favorites].sort((a, b) => b.title.localeCompare(a.title));
+      case "note_asc":
+        return [...favorites].sort((a, b) => a.vote_average - b.vote_average);
+      case "note_desc":
+        return [...favorites].sort((a, b) => b.vote_average - a.vote_average);
+      default:
+        return favorites;
+    }
+  };
+
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
   const values = useMemo(
     () => ({
-      favorites,
+      favorites: getFilteredMovies(),
       addFavorite,
       hasFavorites,
       removeFavorite,
     }),
-    [favorites]
+    [favorites, filter]
   );
 
   return (

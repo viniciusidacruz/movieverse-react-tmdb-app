@@ -15,8 +15,10 @@ export const MovieListFavorites = () => {
   if (!hasFavorites) {
     return (
       <State.Root className="mt-10 max-w-96 text-center mx-auto">
-        <State.Title>Ops! a lista está vazia.</State.Title>
-        <State.Text>Não tem nenhum filme adicionado como favorito.</State.Text>
+        <State.Title>Nenhum filme favorito ainda.</State.Title>
+        <State.Text>
+          Comece explorando filmes populares e adicione seus favoritos!
+        </State.Text>
         <Button
           type="button"
           onClick={() => navigate(-1)}
