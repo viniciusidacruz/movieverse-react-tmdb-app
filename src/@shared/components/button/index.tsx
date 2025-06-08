@@ -14,7 +14,7 @@ export const Button = ({
     className={cn(
       className,
       disabled || (isLoading && "cursor-not-allowed opacity-5"),
-      "p-4 rounded-md flex items-center gap-2 bg-blue-500"
+      "p-4 rounded-md flex items-center justify-center gap-2 bg-blue-500 cursor-pointer"
     )}
     {...props}
   >

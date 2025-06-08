@@ -5,7 +5,7 @@ import type { TIcon, TImage, TRoot, TTitle } from "./types";
 const Root = ({ className, children, ...props }: TRoot) => (
   <div
     className={cn(
-      "flex flex-col min-w-72 relative gap-4 bg-slate-700",
+      "flex flex-col min-w-72 relative gap-4 bg-slate-700 rounded-xl",
       className
     )}
     {...props}
@@ -26,7 +26,11 @@ const Image = ({ src, className, ...props }: TImage) => {
   }
 
   return (
-    <img src={src} className={cn("w-full h-full", className)} {...props} />
+    <img
+      src={src}
+      className={cn("w-full h-full rounded-t-xl", className)}
+      {...props}
+    />
   );
 };
 
