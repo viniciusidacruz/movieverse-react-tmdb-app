@@ -13,6 +13,7 @@ export default defineConfig({
       "@modules": path.resolve(__dirname, "src/modules"),
       "@home_module": path.resolve(__dirname, "src/modules/home"),
       "@favorites_module": path.resolve(__dirname, "src/modules/favorites"),
+      "@movie_module": path.resolve(__dirname, "src/modules/movie"),
     },
   },
 });

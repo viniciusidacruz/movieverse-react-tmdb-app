@@ -8,4 +8,7 @@ export const ROUTES = {
   favorites: {
     path: "/favorites",
   },
+  search: {
+    path: "/search",
+  },
 };

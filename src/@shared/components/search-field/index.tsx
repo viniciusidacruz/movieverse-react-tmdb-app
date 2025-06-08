@@ -1,6 +1,8 @@
 import { useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 
+import { ROUTES } from "@shared/constants";
 import { useDebounce } from "@shared/hooks";
 
 import type { TSearchField } from "./types";
@@ -11,10 +13,26 @@ export const SearchField = ({ ...props }: TSearchField) => {
   });
   const [inputValue, setInputValue] = useState(query ?? "");
 
+  const navigate = useNavigate();
   const debouncedValue = useDebounce(inputValue, 500);
 
+  const pathname = useLocation().pathname;
+  const isSearchPage = pathname === ROUTES.search.path;
+
   useEffect(() => {
-    setQuery(debouncedValue);
+    const hasDebounceValue = !!debouncedValue.length;
+
+    if (isSearchPage && hasDebounceValue) {
+      setQuery(debouncedValue);
+      return;
+    }
+
+    if (hasDebounceValue) {
+      navigate(`/search?query=${encodeURIComponent(debouncedValue)}`);
+      return;
+    }
+
+    setQuery("");
   }, [debouncedValue, setQuery]);
 
   return (
