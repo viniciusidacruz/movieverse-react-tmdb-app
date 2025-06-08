@@ -3,7 +3,7 @@ import { NuqsAdapter } from "nuqs/adapters/react";
 import { act, render, screen, fireEvent } from "@testing-library/react";
 
 import { SearchField } from ".";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router";
 
 const sut = (
   <NuqsAdapter>

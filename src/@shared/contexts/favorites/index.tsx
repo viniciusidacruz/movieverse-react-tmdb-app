@@ -24,6 +24,8 @@ export const FavoritesContextProvider = ({
     loadStorageFavorites()
   );
 
+  const hasFavorites = !!favorites.length;
+
   const addFavorite = useCallback(
     (movie: Movie) => {
       setFavorites((previousFavorites) => {
@@ -58,6 +60,7 @@ export const FavoritesContextProvider = ({
     () => ({
       favorites,
       addFavorite,
+      hasFavorites,
       removeFavorite,
     }),
     [favorites]

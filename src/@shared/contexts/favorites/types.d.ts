@@ -7,6 +7,7 @@ export interface IFavoritesContextProvider {
 
 export interface IFavoritesContext {
   favorites: Movie[];
+  hasFavorites: boolean;
   addFavorite: (movie: Movie) => void;
   removeFavorite: (id: number) => void;
 }

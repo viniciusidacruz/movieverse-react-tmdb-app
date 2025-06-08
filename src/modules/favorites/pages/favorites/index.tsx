@@ -1,1 +1,3 @@
-export const FavoritesPage = () => <h1>FavoritesPage</h1>;
+import { MovieListFavorites } from "@favorites_module/components";
+
+export const FavoritesPage = () => <MovieListFavorites />;

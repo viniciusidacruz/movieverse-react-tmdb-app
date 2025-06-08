@@ -18,9 +18,15 @@ export const SearchField = ({ ...props }: TSearchField) => {
 
   const pathname = useLocation().pathname;
   const isSearchPage = pathname === ROUTES.search.path;
+  const isHomePage = pathname === ROUTES.home.path;
 
   useEffect(() => {
     const hasDebounceValue = !!debouncedValue.length;
+
+    if (isHomePage) {
+      setQuery("");
+      setInputValue("");
+    }
 
     if (isSearchPage && hasDebounceValue) {
       setQuery(debouncedValue);
@@ -31,8 +37,6 @@ export const SearchField = ({ ...props }: TSearchField) => {
       navigate(`/search?query=${encodeURIComponent(debouncedValue)}`);
       return;
     }
-
-    setQuery("");
   }, [debouncedValue, setQuery]);
 
   return (

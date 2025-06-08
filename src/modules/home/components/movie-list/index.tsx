@@ -5,13 +5,18 @@ import { Link, useNavigate } from "react-router";
 import { ROUTES } from "@shared/constants";
 import { buildImageURL } from "@shared/utils";
 import { useFavoritesContext } from "@shared/hooks";
-import { usePopularMovies } from "@home_module/hooks";
 import { Badge, Button, Card, Pagination, State } from "@shared/components";
 
-export const MovieListDefault = () => {
+import type { IMovieList } from "./types";
+
+export const MovieList = ({
+  data,
+  hasMovies,
+  isError,
+  isLoading,
+}: IMovieList) => {
   const navigate = useNavigate();
 
-  const { data, hasMovies, isLoading, isError } = usePopularMovies();
   const { favorites, addFavorite } = useFavoritesContext();
 
   if (isLoading) {
@@ -26,8 +31,10 @@ export const MovieListDefault = () => {
   if (!isLoading && !hasMovies && !isError) {
     return (
       <State.Root className="mt-10">
-        <State.Title>Ops! filmes populares em falta.</State.Title>
-        <State.Text>Não foi encontrado filmes populares no momento</State.Text>
+        <State.Title>Ops! essa lista está vazia.</State.Title>
+        <State.Text>
+          Parece que nada foi encontrado, faça outra pesquisa.
+        </State.Text>
       </State.Root>
     );
   }

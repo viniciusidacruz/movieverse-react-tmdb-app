@@ -8,4 +8,9 @@ export interface GetAllInput {
   page: string;
 }
 
+export interface GetAllBySearchInput {
+  page: string | undefined;
+  query: string;
+}
+
 export type GetByIdOutput = Movie;

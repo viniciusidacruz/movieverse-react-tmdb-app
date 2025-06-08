@@ -1,3 +1,15 @@
-import { MovieListDefault } from "@home_module/components";
+import { usePopularMovies } from "@home_module/hooks";
+import { MovieList } from "@home_module/components";
 
-export const HomePage = () => <MovieListDefault />;
+export const HomePage = () => {
+  const { data, hasMovies, isError, isLoading } = usePopularMovies();
+
+  return (
+    <MovieList
+      data={data}
+      isError={isError}
+      isLoading={isLoading}
+      hasMovies={hasMovies}
+    />
+  );
+};

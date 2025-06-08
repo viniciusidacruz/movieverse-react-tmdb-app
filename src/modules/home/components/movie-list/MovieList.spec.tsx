@@ -1,37 +1,33 @@
-import { BrowserRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router";
 import { NuqsAdapter } from "nuqs/adapters/react";
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 
-import * as hooks from "@home_module/hooks";
 import { FavoritesContextProvider } from "@shared/contexts";
 
-import { MovieListDefault } from ".";
+import { MovieList } from ".";
+import type { IMovieList } from "./types";
 
-const sut = (
-  <BrowserRouter>
-    <NuqsAdapter>
-      <FavoritesContextProvider>
-        <MovieListDefault />
-      </FavoritesContextProvider>
-    </NuqsAdapter>
-  </BrowserRouter>
-);
+const renderWithProviders = (props: IMovieList) => {
+  return render(
+    <MemoryRouter>
+      <NuqsAdapter>
+        <FavoritesContextProvider>
+          <MovieList {...props} />
+        </FavoritesContextProvider>
+      </NuqsAdapter>
+    </MemoryRouter>
+  );
+};
 
-describe("MovieListDefault", () => {
-  beforeEach(() => {
-    vi.restoreAllMocks();
-  });
-
-  it("Should be return loading state", () => {
-    vi.spyOn(hooks, "usePopularMovies").mockReturnValue({
+describe("MovieList", () => {
+  it("Should render loading state", () => {
+    renderWithProviders({
       data: undefined,
       hasMovies: false,
       isLoading: true,
       isError: false,
     });
-
-    render(sut);
 
     expect(screen.getByText("Aguarde um momento!")).toBeInTheDocument();
     expect(
@@ -39,8 +35,8 @@ describe("MovieListDefault", () => {
     ).toBeInTheDocument();
   });
 
-  it("Should be return empty state", () => {
-    vi.spyOn(hooks, "usePopularMovies").mockReturnValue({
+  it("Should render empty state", () => {
+    renderWithProviders({
       data: {
         results: [],
         page: 1,
@@ -52,25 +48,19 @@ describe("MovieListDefault", () => {
       isError: false,
     });
 
-    render(sut);
-
+    expect(screen.getByText("Ops! essa lista está vazia.")).toBeInTheDocument();
     expect(
-      screen.getByText("Ops! filmes populares em falta.")
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("Não foi encontrado filmes populares no momento")
+      screen.getByText("Parece que nada foi encontrado, faça outra pesquisa.")
     ).toBeInTheDocument();
   });
 
-  it("Should be return error state", () => {
-    vi.spyOn(hooks, "usePopularMovies").mockReturnValue({
+  it("Should render error state", () => {
+    renderWithProviders({
       data: undefined,
       hasMovies: false,
       isLoading: false,
       isError: true,
     });
-
-    render(sut);
 
     expect(screen.getByText("Ops! algo deu erro.")).toBeInTheDocument();
     expect(
@@ -81,8 +71,8 @@ describe("MovieListDefault", () => {
     ).toBeInTheDocument();
   });
 
-  it("Should be return list of movies", () => {
-    vi.spyOn(hooks, "usePopularMovies").mockReturnValue({
+  it("Should render list of movies", () => {
+    renderWithProviders({
       data: {
         results: [
           {
@@ -93,7 +83,7 @@ describe("MovieListDefault", () => {
             original_language: "en",
             original_title: "Predator: Killer of Killers",
             overview:
-              "This original animated anthology follows three of the fiercest warriors in human history: a Viking raider guiding her young son on a bloody quest for revenge, a ninja in feudal Japan who turns against his Samurai brother in a brutal battle for succession, and a WWII pilot who takes to the sky to investigate an otherworldly threat to the Allied cause.",
+              "This original animated anthology follows three of the fiercest warriors in human history...",
             popularity: 708.7155,
             poster_path: "/lIBtgpfiB92xNoB3Wa2ZtRtcyYP.jpg",
             release_date: "2025-06-05",
@@ -105,14 +95,12 @@ describe("MovieListDefault", () => {
         ],
         page: 1,
         total_pages: 1,
-        total_results: 0,
+        total_results: 1,
       },
       hasMovies: true,
       isLoading: false,
       isError: false,
     });
-
-    render(sut);
 
     expect(screen.getByText("Predator: Killer of Killers")).toBeInTheDocument();
     expect(screen.getByText("8")).toBeInTheDocument();
