@@ -1,16 +1,19 @@
 import { BrowserRouter } from "react-router-dom";
+import { NuqsAdapter } from "nuqs/adapters/react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import * as hooks from "@home_module/hooks";
+import { FavoritesContextProvider } from "@shared/contexts";
 
 import { MovieListDefault } from ".";
-import { NuqsAdapter } from "nuqs/adapters/react";
 
 const sut = (
   <BrowserRouter>
     <NuqsAdapter>
-      <MovieListDefault />
+      <FavoritesContextProvider>
+        <MovieListDefault />
+      </FavoritesContextProvider>
     </NuqsAdapter>
   </BrowserRouter>
 );
