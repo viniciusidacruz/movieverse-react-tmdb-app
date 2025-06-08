@@ -10,7 +10,7 @@ export class MovieService {
   async getAll({ page = "1" }: GetAllInput): Promise<GetAllOutput> {
     try {
       const { data } = await BASE_URL.get<GetAllOutput>(
-        `/movie/popular?&page=${page}`
+        `/movie/popular?&page=${page}&include_adult=false`
       );
 
       return data;

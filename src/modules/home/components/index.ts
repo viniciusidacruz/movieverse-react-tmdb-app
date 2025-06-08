@@ -1,1 +1,1 @@
-export * from "./list-default";
+export * from "./movie-list-default";
