@@ -1,1 +1,3 @@
-export const HomePage = () => <h1>Home</h1>;
+import { ListDefault } from "@home_module/components";
+
+export const HomePage = () => <ListDefault />;

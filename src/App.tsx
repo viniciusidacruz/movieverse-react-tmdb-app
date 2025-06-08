@@ -1,8 +1,12 @@
 import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
-import { AppRoutes } from "@shared/config";
+import { QueryClientProvider } from "@tanstack/react-query";
+
+import { AppRoutes, queryClient } from "@shared/config";
 
 export const App = () => (
   <NuqsAdapter>
-    <AppRoutes />
+    <QueryClientProvider client={queryClient}>
+      <AppRoutes />
+    </QueryClientProvider>
   </NuqsAdapter>
 );
