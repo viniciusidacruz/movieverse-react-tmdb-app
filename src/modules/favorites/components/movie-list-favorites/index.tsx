@@ -14,7 +14,7 @@ export const MovieListFavorites = () => {
 
   if (!hasFavorites) {
     return (
-      <State.Root className="mt-10 max-w-96 text-center mx-auto">
+      <State.Root className="mt-10 max-w-1/2 text-center mx-auto">
         <State.Title>Nenhum filme favorito ainda.</State.Title>
         <State.Text>
           Comece explorando filmes populares e adicione seus favoritos!

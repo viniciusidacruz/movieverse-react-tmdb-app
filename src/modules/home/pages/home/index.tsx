@@ -1,5 +1,5 @@
-import { usePopularMovies } from "@home_module/hooks";
 import { MovieList } from "@home_module/components";
+import { usePopularMovies } from "@home_module/hooks";
 
 export const HomePage = () => {
   const { data, hasMovies, isError, isLoading } = usePopularMovies();

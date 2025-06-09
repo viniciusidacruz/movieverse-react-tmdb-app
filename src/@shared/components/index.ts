@@ -8,3 +8,4 @@ export * from "./select";
 export * from "./pagination";
 export * from "./layout-pages";
 export * from "./search-field";
+export * from "./layout-not-found";

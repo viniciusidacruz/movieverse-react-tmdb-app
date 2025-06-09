@@ -5,12 +5,15 @@ import { render, screen } from "@testing-library/react";
 import { FavoritesContextProvider } from "@shared/contexts";
 
 import { MovieListFavorites } from ".";
+import { NuqsAdapter } from "nuqs/adapters/react";
 
 const sut = (
   <BrowserRouter>
-    <FavoritesContextProvider>
-      <MovieListFavorites />
-    </FavoritesContextProvider>
+    <NuqsAdapter>
+      <FavoritesContextProvider>
+        <MovieListFavorites />
+      </FavoritesContextProvider>
+    </NuqsAdapter>
   </BrowserRouter>
 );
 
@@ -18,9 +21,13 @@ describe("MovieListFavorites", () => {
   it("Should render empty state", () => {
     render(sut);
 
-    expect(screen.getByText("Ops! a lista está vazia.")).toBeInTheDocument();
     expect(
-      screen.getByText("Não tem nenhum filme adicionado como favorito.")
+      screen.getByText("Nenhum filme favorito ainda.")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Comece explorando filmes populares e adicione seus favoritos!"
+      )
     ).toBeInTheDocument();
   });
 });

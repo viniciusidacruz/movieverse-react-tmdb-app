@@ -5,11 +5,11 @@ import {
   useCallback,
   createContext,
 } from "react";
+import { useQueryState } from "nuqs";
 
-import type { Movie } from "@shared/interfaces";
+import type { IMovie } from "@shared/interfaces";
 
 import type { IFavoritesContext, IFavoritesContextProvider } from "./types";
-import { useQueryState } from "nuqs";
 
 export const FavoritesContext = createContext<IFavoritesContext | null>(null);
 
@@ -21,7 +21,7 @@ export const FavoritesContextProvider = ({
     return storageFavorites ? JSON.parse(storageFavorites) : [];
   };
 
-  const [favorites, setFavorites] = useState<Movie[]>(() =>
+  const [favorites, setFavorites] = useState<IMovie[]>(() =>
     loadStorageFavorites()
   );
 
@@ -32,7 +32,7 @@ export const FavoritesContextProvider = ({
   const hasFavorites = !!favorites.length;
 
   const addFavorite = useCallback(
-    (movie: Movie) => {
+    (movie: IMovie) => {
       setFavorites((previousFavorites) => {
         const isAlreadyFavorite = previousFavorites.some(
           (fav) => fav.id === movie.id
