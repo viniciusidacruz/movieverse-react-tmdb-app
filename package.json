@@ -5,7 +5,7 @@
   "type": "module",
   "engines": {
     "node": ">=22.14.0",
-    "yarn": ">=1.22.22",
+    "yarn": ">=1.22.0",
     "npm": "please-use-yarn",
     "pnpm": "please-use-yarn",
     "bun": "please-yse-yarn"
